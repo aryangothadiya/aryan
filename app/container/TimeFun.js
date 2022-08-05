@@ -1,21 +1,56 @@
-import { View, Text, TimePickerAndroid } from 'react-native'
-import React, { useEffect, useState } from 'react'
+let styles = StyleSheet.create({
+    time: {
+        fontSize: 50,
+        margin: 90,
 
-export default function TimeFun() {
-    const [time, settime] = useState(new Date());
+    },
 
-    useEffect(() => {
-        const t = setInterval(() => {
-            tick();
-        }, 1000);
+})
 
-        return () => {
-            clearInterval(t)
+
+
+import { Text, View, StyleSheet } from 'react-native'
+import React, { Component } from 'react'
+
+export default class Timer extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            time: new Date()
         }
-    }, []);
-    return (
-        <View>
-            <Text>{time.toLocaleTimeString()}</Text>
-        </View>
-    )
+    }
+
+    tick = () => {
+        this.setState({
+            time: new Date()
+        })
+    }
+
+    componentDidMount = () => {
+        this.time = setInterval(() => {
+            this.tick()
+        }, 1000)
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if (prevState.time !== this.state.time) {
+
+        }
+    }
+
+    componentWillUnmount = () => {
+        clearInterval(this.time)
+    }
+
+    render() {
+        console.log(this.state.time);
+        return (
+            <View style={StyleSheet.container}>
+                <Text style={styles.time}>{this.state.time.toLocaleTimeString()}</Text>
+            </View>
+        )
+    }
 }
+
+

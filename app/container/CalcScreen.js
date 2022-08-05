@@ -1,6 +1,6 @@
-import { View, Text, TouchableOpacity, StyleSheet, Button } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
-import { Value } from 'sass';
+
 
 export default function CalcScreen() {
 
@@ -59,7 +59,7 @@ export default function CalcScreen() {
       backgroundColor: 'black'
     },
     TButton: {
-      fontSize: 20;
+      fontSize: 20,
       color: "white"
     },
     TextColor: {
@@ -103,6 +103,7 @@ export default function CalcScreen() {
           })
         }
       </View>
+
     </View>
   )
 }
