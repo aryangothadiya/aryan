@@ -1,13 +1,12 @@
 import { View, Text, ScrollView, FlatList, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native'
 import React from 'react'
-import { iconss } from '../assets/icons';
-import { colors } from '../assets/colors/colors';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 
-export default function AppliCation() {
+export default function AppliCation({navigation}) {
 
   const DATA = [
     {
@@ -15,49 +14,55 @@ export default function AppliCation() {
       product: 'XC-72 low-top',
       price: '399',
       orgPrice: '599',
-      image: require('../assets/images/nb.png'),
+      image: require('../../assets/images/nb.png'),
     },
     {
       id: 2,
       product: 'XC-81 low-top',
       price: '549',
-      image: require('../assets/images/nb2.png'),
+      image: require('../../assets/images/nb2.png'),
     },
     {
       id: 3,
       product: 'Chunkey Lather Shoes',
       price: '649',
-      image: require('../assets/images/zara.png'),
+      image: require('../../assets/images/zara.png'),
     },
     {
       id: 4,
       product: 'Formal Monk Shoes',
       price: '799',
-      image: require('../assets/images/zara2.png'),
+      image: require('../../assets/images/zara2.png'),
     }
   ]
+
+  const DrawerNavigation = (props) => {
+    return (
+      <DrawerContentScrollView {...props}>
+        <DrawerItemList {...props} />
+      </DrawerContentScrollView>
+    );
+  }
 
   const shoeData = ({ item }) => {
     console.log("item");
     return (
       <View style={styles.card}>
         <View>
-          <Image style={[styles.images1, { height: item.id === 2 ? 220 : 190 }]} source={item.image} />
+          <TouchableOpacity
+           onPress={() => navigation.navigate('SecPage')}  
+          >
+            <Image style={styles.images1} source={item.image} />
+          </TouchableOpacity>
         </View>
-        <View style={[styles.heartBox, { top: item.id === 2 ? 5 : 20 }]}>
+        <View style={styles.heartBox}>
           <TouchableOpacity>
             <MaterialIcons name="favorite-border" style={styles.imageIcon} color="#000" size={20} />
           </TouchableOpacity>
-          <View style={styles.lessPrice}>
-            <Text lessPriceText>33%</Text>
-          </View>
         </View>
 
         <Text style={styles.cardText1}>{item.product}</Text>
         <Text style={styles.cardText2}><Text style={styles.dolar}>$</Text>{item.price}</Text>
-        <TouchableOpacity style={styles.pluseBox}>
-          <AntDesign name='newbalance' style={styles.plusIcon}></AntDesign>
-        </TouchableOpacity>
       </View>
 
 
@@ -68,47 +73,39 @@ export default function AppliCation() {
       <View style={styles.container}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginTop: 42 }}>
           <TouchableOpacity style={styles.menuIcon}>
-            <Image source={iconss.menu} />
+            <AntDesign name='menuunfold' size={30}  onPress={() => navigation.openDrawer()} ></AntDesign>
           </TouchableOpacity>
 
           <View style={styles.SearchBox}>
             <AntDesign name='search1' style={styles.searchIcon} />
             <TextInput
-              placeholder='trova il tuo prodotto'
+              placeholder='Search Your Product Here'
             />
           </View>
           <TouchableOpacity style={styles.notificationIconBox}>
-            <Image style={styles.notificationIcon} source={iconss.notification} />
+            <Ionicons name='ios-notifications-circle' size={30}></Ionicons>
           </TouchableOpacity>
         </View>
         <View>
 
 
 
-          <TouchableOpacity style={styles.mainBox}>
-            <View style={styles.subBox}>
-              <Text style={styles.text1}>Nuovi-Arrivi</Text>
-              <Text style={styles.text2}>Saldi-Estivi</Text>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.button}>Negozio No</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View>
-              <Image source={require('../assets/images/nb.png')} />
-            </View>
+          <View style={styles.sliderBox}>
+            <TouchableOpacity>
+              <Image style={styles.slider} source={require('../../assets/images/new1.jpg')} />
+            </TouchableOpacity>
+          </View>
 
 
-          </TouchableOpacity>
 
 
 
           <View style={styles.list}>
 
-            <TouchableOpacity style={[styles.listing, styles.change]} ><Text style={[styles.listText, styles.changeText]}>Tutto</Text></TouchableOpacity>
-            <TouchableOpacity style={[styles.listing, styles.change1]}><Text style={styles.listText}>Categoria</Text></TouchableOpacity>
-            <TouchableOpacity style={[styles.listing, styles.change2]} ><Text style={styles.listText}>Cuovo</Text></TouchableOpacity>
-            <TouchableOpacity style={[styles.listing, styles.change3]}><Text style={styles.listText}>Sconto</Text></TouchableOpacity>
+            <TouchableOpacity style={[styles.listing, styles.change]} ><Text style={styles.listText}>All</Text></TouchableOpacity>
+            <TouchableOpacity style={[styles.listing, styles.change1]}><Text style={styles.listText}>Categories</Text></TouchableOpacity>
+            <TouchableOpacity style={[styles.listing, styles.change2]} ><Text style={styles.listText}>Deals</Text></TouchableOpacity>
+            <TouchableOpacity style={[styles.listing, styles.change3]}><Text style={styles.listText}>Offer</Text></TouchableOpacity>
           </View>
         </View>
         <View>
@@ -127,22 +124,26 @@ export default function AppliCation() {
 
 const styles = StyleSheet.create({
   menuIcon: {
-    color: colors.primary,
+    color: 'black',
     marginRight: 14,
     marginLeft: 15,
     marginBottom: 12,
     marginVertical: 5,
     height: 20,
-    width: 20
+    width: 20,
+    marginTop: 8
+
   },
   SearchBox: {
     flexDirection: 'row',
-    backgroundColor: white,
+    backgroundColor: '#B8BEC3',
     height: 40,
-    width: 200,
+    width: 230,
     marginLeft: 15,
     marginRight: 14,
     borderRadius: 5,
+    marginBottom: 10
+
   },
 
   searchIcon: {
@@ -152,7 +153,8 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: 11,
     marginBottom: 11,
-    fontSize: 14
+    fontSize: 14,
+
   },
   notificationIconBox: {
     height: 40,
@@ -160,7 +162,8 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginLeft: 16,
     borderRadius: 5,
-    backgroundColor: '#F3F3F3'
+    marginTop: 4
+
   },
   notificationIcon: {
     height: 18,
@@ -169,8 +172,20 @@ const styles = StyleSheet.create({
     marginLeft: 11,
     marginRight: 11,
     marginTop: 11,
+    backgroundColor: '#F3F3F3',
+    color: 'black',
   },
+  sliderBox: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: "center",
+  },
+  slider: {
+    height: 200,
+    width: 450,
+    marginTop: 15,
 
+  },
 
   mainBox: {
     height: 134,
@@ -180,39 +195,39 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   subBox: {
-    height: 70,
-    width: 140,
+    height: 0,
+    width: 0,
     marginLeft: 19,
     marginBottom: 30,
-    marginTop: 34,
+    // marginTop: 34,
     padding: 5,
   },
 
   text1: {
     fontSize: 15,
-    fontFamily: 'roboto-SemiBold',
+    fontFamily: 'Roboto-bold',
     color: 'black'
   },
   text2: {
     fontSize: 16,
     color: "#FF5035",
-    fontFamily: 'roboto-SemiBold',
+    fontFamily: 'Roboto-bold',
     marginTop: 5
   },
   button: {
     height: 26,
     width: 90,
-    backgroundColor: "#FF5035",
+    backgroundColor: "#5D6D7E ",
     marginTop: 5,
     borderRadius: 5,
     color: 'white',
-    fontFamily: 'roboto-Regular',
+    fontFamily: 'Roboto-Regular',
     textAlign: 'center',
   },
   images1: {
-    width: '100%',
+    width: 150,
     borderRadius: 5,
-
+    height: 130,
   },
   dolar: {
     fontSize: 9
@@ -233,22 +248,22 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     marginVertical: 10,
     marginHorizontal: 10,
-    fontFamily: 'roboto-Medium',
-    color: 'black'
+    fontFamily: 'Poppins-Medium',
+    color: 'black',
+    fontSize:14
   },
   listing: {
     width: 102,
     height: 40,
-    backgroundColor: '#F3F3F3',
+    backgroundColor: '#D5D8DC',
     borderRadius: 5
   },
   change: {
-    backgroundColor: "#FF5035",
     width: 48,
     height: 40,
   },
   changeText: {
-    color: '#ffff'
+    color: '#273746 '
   },
   change1: {
     width: 102,
@@ -265,7 +280,7 @@ const styles = StyleSheet.create({
 
 
   card: {
-    height: 280,
+    height: 220,
     marginVertical: 10,
     width: 150,
     backgroundColor: '#F3F3F3',
@@ -277,10 +292,12 @@ const styles = StyleSheet.create({
     position: 'relative',
     flex: 1,
     justifyContent: 'center',
+    
   },
 
   cardText1: {
     color: 'black',
+    // backgroundColor:'red',
     fontSize: 13,
     lineHeight: 22,
     fontFamily: 'roboto-Medium',
@@ -299,16 +316,16 @@ const styles = StyleSheet.create({
   heartBox: {
     height: 25,
     width: 25,
-    backgroundColor: colors.white,
+    backgroundColor: 'red',
     borderRadius: 50,
     position: 'absolute',
-    top: 20,
+    top: 25,
     left: 10
   },
 
 
   imageIcon: {
-    color: colors.primary,
+    color: 'white',
     alignSelf: 'center',
     padding: 2.5,
   },
@@ -321,7 +338,7 @@ const styles = StyleSheet.create({
   },
   plusIcon: {
     fontSize: 25,
-    color: 'green',
+    color: 'black',
   },
   lessPrice: {
     height: 24,
@@ -330,7 +347,20 @@ const styles = StyleSheet.create({
   },
   lessPriceText: {
     fontSize: 90,
-    color: colors.white
+    color: 'white'
   },
 
 })
+// import { View, Text } from 'react-native'
+// import React from 'react'
+// import AntDesign from 'react-native-vector-icons/AntDesign';
+
+// export default function AppliCation() {
+//   return (
+//     <View>
+//       <AntDesign name='caretup' size={30}>
+
+//       </AntDesign>
+//     </View>
+//   )
+// }
