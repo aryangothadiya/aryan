@@ -1,9 +1,10 @@
 {
-    "posts": [
+    "post": [
         {
             "id": 1,
-            "title": "json-server",
-            "author": "typicode"
+            "title": "Demo1",
+            "author": "ABCD",
+            "img": "../image/a.jpg"
         },
         {
             "id": 2,

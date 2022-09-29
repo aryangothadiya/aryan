@@ -1,9 +1,9 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AppliCation from '../../app/container/AppliCation';
-import SecPage from '../../app/container/SecPage';
+import AppliCation from '../container/AppliCation';
+import SecPage from '../container/SecPage';
 import { Header } from 'react-native/Libraries/NewAppScreen';
-import Counter from '../../app/container/Counter';
+import Counter from '../container/Counter';
 
 const Stack = createNativeStackNavigator();
 

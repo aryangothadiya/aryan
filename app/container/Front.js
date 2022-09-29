@@ -3,9 +3,9 @@ import React from 'react'
 
 export default function Front() {
   return (
-    <View style={styles.container}>
-             <Image style={styles.neb} source={require('../../assets/images/neb.png')}/>
-    </View>
+      <View style={styles.container}>
+              <Image style={styles.neb} source={require('../../assets/images/neb.png')}/>
+      </View>
   )
 }
 

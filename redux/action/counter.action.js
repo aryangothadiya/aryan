@@ -1,3 +1,4 @@
+import { commentsAllData } from '../../common/api/comments.api'
 import* as ActionTypes from '../ActionTypes'
 
 export const incrementCounter = () => (dispatch) => {

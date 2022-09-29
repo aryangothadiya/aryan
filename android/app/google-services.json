@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "137832083080",
+    "project_id": "aryan-1fa82",
+    "storage_bucket": "aryan-1fa82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137832083080:android:f14de7edaae6e12f0a793d",
+        "android_client_info": {
+          "package_name": "com.aryanproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137832083080-gt755erfhfs56j5h8qhmi732o8bl5qh2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aryanproject",
+            "certificate_hash": "1fa65a8a389c05a5abfe70277cd4434d927bc104"
+          }
+        },
+        {
+          "client_id": "137832083080-o3q62slg4amo3o0c6som5qpak9vn1r74.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkJjY_j_TQljAI47sLX1uqc6BWR7TMgus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137832083080-o3q62slg4amo3o0c6som5qpak9vn1r74.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
