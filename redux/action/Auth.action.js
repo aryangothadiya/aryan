@@ -33,16 +33,16 @@ export const signupUser = (data) => (dispatch) => {
 
 export const signinUser = (data) => (dispatch) => {
   try {
-      auth()
-        .signInWithEmailAndPassword(data.email, data.password)
-        .then((user) => {
-          if (user.user.emailVerified) {
-            dispatch({type: ActionTypes.LOGIN_SUCCESS, payload: {user: user.user, authMsg: "Login successfull."}})
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+    auth()
+      .signInWithEmailAndPassword(data.email, data.password)
+      .then((user) => {
+        if (user.user.emailVerified) {
+          dispatch({ type: ActionTypes.LOGIN_SUCCESS, payload: { user: user.user, authMsg: "Login successfull." } })
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   } catch (error) {
 
   }
@@ -51,21 +51,20 @@ export const signinUser = (data) => (dispatch) => {
 export const signOut = () => {
   try {
     auth()
-    .signOut()
-    .then(() => console.log('User signed out!'))
-    .catch((error) => console.log(error))
-
+      .signOut()
+      .then(() => console.log('User signed out!'))
+      .catch((error) => console.log(error))
   } catch (error) {
     console.log(error)
-  } 
+  }
 }
 
 export const resePassword = (email) => {
   try {
     auth()
-    .sendPasswordResetEmail(email)
-    .then(() => console.log("Reset password link sent to your email id."))
-    .catch((error) => console.log(error))
+      .sendPasswordResetEmail(email)
+      .then(() => console.log("Reset password link sent to your email id."))
+      .catch((error) => console.log(error))
 
   } catch (error) {
     console.log(error)
@@ -73,22 +72,18 @@ export const resePassword = (email) => {
 }
 
 export const googleLogin = () => async (dispatch) => {
-   console.log('aryan1');
-   try{
+  console.log('aryan1');
+  try {
     const { idToken } = await GoogleSignin.signIn();
-          
-    console.log(idToken);
+
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    
+
     // Sign-in the user with the credential
     return auth().signInWithCredential(googleCredential);
-
-      //Sign-in the user with the credential
-      //return auth().signInWithCredential(googleCredentile);
-   }catch(error){
+  } catch (error) {
     console.log(error);
-   }
-   //dispatch({type:ActionTypes.LOGIN_SUCCESS})
+  }
+  //dispatch({type:ActionTypes.LOGIN_SUCCESS})
 }
 

@@ -10,6 +10,8 @@ import { DrawerNavigation } from './app/route/DrawerNavigation';
 import Front from './app/container/Front';
 import { store } from './redux/store';
 import { Provider } from 'react-redux'
+import Forgot from './app/container/Forgot';
+import CreateNewPassword from './app/container/SignUp';
 // import CalcButton from './app/container/CalcButton'
 // import CalcDisplay from './app/container/CalcDisplay'
 //import CalcButton from './app/container/CalcScreen'
@@ -26,6 +28,8 @@ export default function App() {
         {/* <SecPage /> */}
         {/* <AddBag/> */}
         {/* <Front/> */}
+        {/* <Forgot/> */}
+        {/* <CreateNewPassword/> */}
       </NavigationContainer>
     </Provider>
   )

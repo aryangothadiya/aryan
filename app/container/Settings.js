@@ -9,17 +9,18 @@ export default function Settings() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSignOut = () => {
-    dispatch(signOut({email, password}))
+  const handleSignOut = () => (dispatch) => {
+    console.log();
+    dispatch(signOut())
   }
 
-  return (
+  return(
     <View>
       <TouchableOpacity
         onPress={() => handleSignOut()}>
         <View style={styles.SignInButton}>
 
-          <Text style={styles.SignInText}>Sign Out</Text>
+          <Text style={styles.SignOutText}>Sign Out</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 61
   },
-  SignInText: {
+  SignOutText: {
     color: 'white',
     fontSize: 16,
     fontFamily: 'Montserrat-SemiBold',

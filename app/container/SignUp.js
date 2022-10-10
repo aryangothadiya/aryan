@@ -1,311 +1,199 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native'
-import React, { useEffect } from 'react'
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Feather from 'react-native-vector-icons/Feather';
-import Fontisto from 'react-native-vector-icons/Fontisto';
+import React from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { googleLogin, signinUser, signupUser } from '../../redux/action/Auth.action';
-import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { signupUser } from '../../redux/action/Auth.action';
+
 
 
 export default function SignUp({ navigation }) {
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const auth = useSelector(state => state.user)
+  const auth1 = useSelector(state => state.user)
 
-    const handleSignup = () => {
-        console.log({ email, password });
+  const handleSignIn = () => {
         dispatch(signupUser({ email, password }))
     }
 
-    const handleGoogleAuth = async () => {
-        // //await GoogleSignin.hasPlayServices()
-        console.log('aaaryan');
-        const { idToken } = await GoogleSignin.signIn();
 
-        console.log(idToken);
-
-        // Create a Google credential with the token
-        const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-        console.log(googleCredential);
-
-        // Sign-in the user with the credential
-        await auth().signInWithCredential(googleCredential);
-
-        // dispatch(googleLogin())
-    }
-
-    useEffect(() => {
-        GoogleSignin.configure({
-            webClientId: '137832083080-o3q62slg4amo3o0c6som5qpak9vn1r74.apps.googleusercontent.com',
-            offlineAccess: true
-        });
-    }, [])
-
-    // const handleSignIn = () => {
-    //     dispatch(signinUser({ email, password }))
-    // }
-
-
-
-    return (
-        <View style={styles.container}
-        >
-            {/* ----------------------WELCOME BOX --------------------- */}
-            <View style={styles.wellComeBOX}>
-                {/* <Text style={styles.welcome}>Welcome! </Text>
+  return (
+    <View>
+      <View style={styles.wellComeBOX}>
+        {/* <Text style={styles.welcome}>Welcome! </Text>
                 <Text style={styles.EnterData}>Enter your data to continue</Text> */}
-                <Image style={styles.neb} source={require('../../assets/images/neb.png')} />
+        <Image style={styles.neb} source={require('../../assets/images/neb.png')} />
 
-            </View>
-            {/* ----------------------MOBILE INPUT --------------------- */}
-            <View style={styles.MobileBox}>
-                <Feather name='voicemail' style={styles.InputIcon} />
-                <TextInput style={styles.TextInput}
-                    placeholder='Email Id'
-                    onChangeText={(text) => setEmail(text)}
-                />
-            </View>
-            {/* ----------------------LOCK INPUT --------------------- */}
-            <View style={styles.LockBox}>
-                <Feather name='lock' style={styles.InputIcon} />
-                <TextInput style={styles.TextInput}
-                    placeholder='Password'
-                    onChangeText={(text) => setPassword(text)}
-                />
-                <TouchableOpacity>
-                    <AntDesign name='eyeo' style={styles.eyeIcon} />
-                </TouchableOpacity>
-            </View>
-            {/* ----------------------FORGIT PASS--------------------- */}
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                <TouchableOpacity>
-                    <MaterialIcons name='crop-square' style={styles.squarIcon}></MaterialIcons>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Text style={styles.Remeberme}>Remember Me</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Text style={styles.Forgotpass}>Forgot password ?</Text>
-                </TouchableOpacity>
-            </View>
-            {/* ----------------------NINE BOX  --------------------- */}
-            <View style={styles.ORbox}>
+      </View>
+
+      <View style={styles.UserBox}>
+        <AntDesign name='user' style={styles.InputIcon} />
+        <TextInput style={styles.TextInput}
+          placeholder='Your Full Name'
+          // onChangeText={(text) => setEmail(text)}
+        />
+      </View>
+
+      <View style={styles.MobileBox}>
+        <Feather name='voicemail' style={styles.InputIcon} />
+        <TextInput style={styles.TextInput}
+          placeholder='Email Id'
+          onChangeText={(text) => setEmail(text)}
+        />
+      </View>
+      {/* ----------------------LOCK INPUT --------------------- */}
+      <View style={styles.LockBox}>
+        <Feather name='lock' style={styles.InputIcon} />
+        <TextInput style={styles.TextInput}
+          placeholder='Password'
+          onChangeText={(text) => setPassword(text)}
+        />
+        <TouchableOpacity>
+          <AntDesign name='eyeo' style={styles.eyeIcon} />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.ORbox}>
                 <View style={styles.FirstBorder}></View>
                 <Text style={styles.OR}>OR</Text>
                 <View style={styles.SecondBorder}></View>
             </View>
-            {/* ----------------------IMAGESSS --------------------- */}
-            <View style={styles.IconsBox}>
-                {/* ----------------------GOOGLE ICON --------------------- */}
-                <View>
-                    <TouchableOpacity
-                        onPress={() => handleGoogleAuth()}>
-                        <AntDesign name='google' style={[styles.IconsBoxes, { color: 'black' }]} />
-                    </TouchableOpacity>
-                </View>
-                {/* ----------------------APPLE ICON --------------------- */}
-                <View>
-                    <TouchableOpacity>
-                        <AntDesign name='apple1' style={[styles.IconsBoxes, { color: 'black' }, { marginTop: 59 }]} />
-                    </TouchableOpacity>
-                </View>
-                {/* ----------------------TWITER ICON --------------------- */}
-                {/* <View>
-                    <TouchableOpacity>
-                        <AntDesign name='twitter' style={[styles.IconsBoxes, { color: 'black' }, { marginTop: 59 }]} />
-                    </TouchableOpacity>
-                </View> */}
 
-            </View>
+      <View>
+        <TouchableOpacity
+         onPress={() => handleSignIn()}>
+          <View style={styles.SignInButton}>
+            <Text style={styles.SignInText}>SignUp</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+          <Text style={styles.back}>If You Back log in?</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
 
-            {/* ----------------------SIGN IN BUTTON --------------------- */}
-            <TouchableOpacity
-                onPress={() => handleSignup()}>
-                <View style={styles.SignInButton}>
-
-                    <Text style={styles.SignInText}>Sign Up</Text>
-                </View>
-            </TouchableOpacity>
-
-            {/* <TouchableOpacity
-                onPress={() => handleSignIn()}>
-                <View style={styles.SignInButton}>
-
-                    <Text style={styles.SignInText}>Sign In</Text>
-                </View>
-            </TouchableOpacity> */}
-
-            {/* ----------------------SIGN up line --------------------- */}
-            <View style={{ flexDirection: 'row', marginTop: 10, alignSelf: 'center' }}>
-                <Text style={styles.SingUPText}>already have an account?</Text>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('Categoris')}
-                >
-                    <Text style={[styles.SingUPText, { color: '#DA7F8F' }]}>Sign In</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-
-    )
+  )
 }
+
 const styles = StyleSheet.create({
-    neb: {
-        height: 80,
-        width: 110,
-        marginLeft: 50,
-        margin: 350,
-        bottom: 350
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#F6F6F6'
-        // marginLeft:15,
-        // marginRight:15   
-    },
-
-    wellComeBOX: {
-        height: 53,
-        width: 200,
-        alignSelf: 'center',
-        marginTop: 15,
-
-    },
-    welcome: {
-        width: 125,
-        height: 29,
-        fontFamily: 'Montserrat-SemiBold',
-        color: '#DA7F8F',
-        fontSize: 24,
-        marginBottom: 6,
-        alignSelf: 'center'
-
-    },
-    EnterData: {
-        fontSize: 14,
-        fontFamily: 'Poppins-Medium',
-    },
-
-
-    MobileBox: {
-        flexDirection: 'row',
-        backgroundColor: '#E1E5EA',
-        height: 50,
-        width: 350,
-        borderRadius: 10,
-        marginTop: 57,
-        alignSelf: 'center'
-
-    },
-
-    InputIcon: {
-        marginRight: 9,
-        marginLeft: 20,
-        marginTop: 16,
-        marginBottom: 11,
-        fontSize: 20,
-    },
-    TextInput: {
-        fontFamily: 'Poppins-Medium',
-        fontSize: 16,
-        alignSelf: 'center',
-        width: 300,
-        top: 4
-    },
-    LockBox: {
-        flexDirection: 'row',
-        backgroundColor: '#E1E5EA',
-        height: 50,
-        width: 350,
-        borderRadius: 10,
-        marginTop: 57,
-        alignSelf: 'center',
-        marginTop: 20,
-    },
-    eyeIcon: {
-        marginTop: 15,
-        marginLeft: -30,
-        marginBottom: 11,
-        fontSize: 20,
-        justifyContent: 'flex-end'
-    },
-    squarIcon: {
-        marginLeft: 25,
-        marginTop: 12,
-        marginRight: 10,
-        fontSize: 20,
-        fontWeight: 'bold'       //=========font weight ===========//
-    },
-    Remeberme: {
-        marginRight: 61,
-        marginTop: 12,
-        fontFamily: 'Poppins-Medium',
-    },
-    Forgotpass: {
-        marginLeft: 11,
-        marginTop: 12,
-        fontFamily: 'Poppins-Medium',
-        color: '#E23E57'
-    },
-    ORbox: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 61
-    },
-    FirstBorder: {
-        borderWidth: 1,
-        width: '30%',
-        borderColor: 'gray'
-    },
-    OR: {
-        fontFamily: 'Poppins-Medium',
-        fontSize: 17,
-        marginRight: 10,
-        marginLeft: 10,
-    },
-    SecondBorder: {
-        borderWidth: 1,
-        width: '30%',
-        borderColor: 'gray'
-    },
-    IconsBox: {
-        flexDirection: 'row',
-        alignSelf: 'center'
-    },
-    IconsBoxes: {
-        fontSize: 30,
-        marginTop: 60,
-        marginRight: 25
-        ,
-    },
-
-    SignInButton: {
-        height: 40,
-        width: 310,
-        backgroundColor: '#E23E57',
-        borderRadius: 10,
-        alignSelf: 'center',
-        marginTop: 61
-    },
-    SignInText: {
-        color: 'white',
-        fontSize: 16,
-        fontFamily: 'Montserrat-SemiBold',
-        alignSelf: 'center',
-        marginTop: 10,
-    },
-    SingUPText: {
-        fontFamily: 'Poppins-Medium',
-        marginRight: 6,
-        // color:'#DA7F8F'
-    }
-})
+  wellComeBOX: {
+    height: 53,
+    width: 200,
+    alignSelf: 'center',
+    marginTop: 15,
+  },
+  neb: {
+    height: 80,
+    width: 110,
+    marginLeft: 50,
+    margin: 350,
+    bottom: 350
+  },
+  UserBox: {
+    flexDirection: 'row',
+    backgroundColor: '#E1E5EA',
+    height: 50,
+    width: 350,
+    borderRadius: 10,
+    marginTop: 50,
+    alignSelf: 'center'
+  },
+  LockBox: {
+    flexDirection: 'row',
+    backgroundColor: '#E1E5EA',
+    height: 50,
+    width: 350,
+    borderRadius: 10,
+    marginTop: 20,
+    alignSelf: 'center',
+    // marginTop: 20,
+  },
+  eyeIcon: {
+    marginTop: 15,
+    marginLeft: -30,
+    marginBottom: 11,
+    fontSize: 20,
+    justifyContent: 'flex-end'
+  },
+  MobileBox: {
+    flexDirection: 'row',
+    backgroundColor: '#E1E5EA',
+    height: 50,
+    width: 350,
+    borderRadius: 10,
+    marginTop: 20,
+    alignSelf: 'center'
+  },
+  ORbox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 61
+},
+FirstBorder: {
+  borderWidth: 1,
+  width: '30%',
+  borderColor: 'gray'
+},
+OR: {
+  fontFamily: 'Poppins-Medium',
+  fontSize: 17,
+  marginRight: 10,
+  marginLeft: 10,
+},
+SecondBorder: {
+  borderWidth: 1,
+  width: '30%',
+  borderColor: 'gray'
+},
+  InputIcon: {
+    marginRight: 9,
+    marginLeft: 20,
+    marginTop: 16,
+    marginBottom: 11,
+    fontSize: 20,
+  },
+  TextInput: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: 14,
+    alignSelf: 'center',
+    width: 300,
+    top: 4,
+    left: 12
+  },
+  inputtext: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: 12,
+    padding: 10,
+    left: 15,
+    top: 20,
+    // textAlign: 'justify'
+  },
+  SignInButton: {
+    height: 35,
+    width: 250,
+    backgroundColor: '#DA7F8F',
+    borderRadius: 10,
+    alignSelf: 'center',
+    marginTop: 200
+  },
+  SignInText: {
+    color: 'white',
+    fontSize: 14,
+    fontFamily: 'Poppins-Medium',
+    alignSelf: 'center',
+    bottom: -7,
+  },
+  back:{
+    // color:'black',
+    fontFamily:'Poppins-Medium',
+    left:140,
+    top:11,
+    fontSize:14
+  }
+}) 

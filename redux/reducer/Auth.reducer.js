@@ -14,7 +14,7 @@ export const authUserReducer = (state = initVal, action) => {
             return {
                 ...state,
                 isLoading: false,
-                user: action.payload.user,
+                auth: action.payload.user,
                 error: '',
                 authMsg: action.payload.authMsg
             }
@@ -22,7 +22,7 @@ export const authUserReducer = (state = initVal, action) => {
             return {
                 ...state,
                 isLoading: false,
-                user: action.payload.user,
+                auth: action.payload.user,
                 error: '',
                 authMsg: action.payload.authMsg
             }
@@ -31,7 +31,7 @@ export const authUserReducer = (state = initVal, action) => {
                 return {
                     ...state,
                     isLoading: false,
-                    user: action.payload.user,
+                    auth: action.payload.user,
                     error: '',
                     authMsg: action.payload.authMsg
                 }
